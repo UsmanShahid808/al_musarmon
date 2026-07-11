@@ -20,7 +20,7 @@ Al Musarmon is an offline-first Flutter application built for managing a textile
 - Color-coded balance indicators (red = owed, green = cleared)
 
 ### 📦 Product & Stock Management
-- Thaan-based purchase entry — enter cost per roll (thaan), app calculates per-meter cost automatically
+- Thaan-based purchase entry, enter cost per roll (thaan), app calculates per-meter cost automatically
 - Sale pricing per finished suit/top (not per meter) with quick-select price chips
 - Automatic stock calculation based on number of thaans purchased
 - Low stock threshold alerts
@@ -69,7 +69,7 @@ Al Musarmon is an offline-first Flutter application built for managing a textile
 ## 🛠️ Tech Stack
 
 - **Framework:** Flutter (Dart)
-- **Database:** SQLite (via `sqflite`) — fully offline, no internet required
+- **Database:** SQLite (via `sqflite`), fully offline, no internet required
 - **PDF Generation:** `pdf` + `printing` packages
 - **Contacts Integration:** `flutter_contacts`
 - **Messaging:** WhatsApp deep-linking via `url_launcher`
@@ -128,13 +128,13 @@ build/app/outputs/flutter-apk/app-release.apk
 
 ## 📱 Offline-First
 
-Al Musarmon works entirely offline. All data is stored locally on the device using SQLite — no internet connection or backend server required for day-to-day operations. Internet is only used for optional WhatsApp message sharing.
+Al Musarmon works entirely offline. All data is stored locally on the device using SQLite, no internet connection or backend server required for day-to-day operations. Internet is only used for optional WhatsApp message sharing.
 
 ---
 
 ## 👤 Developed For
 
-Shahid Sahab's Textile Business — a shop management solution tailored to real-world workflows: thaan-based fabric purchasing, per-suit pricing, advance payment tailoring orders, and worker/supplier ledger tracking.
+Shahid Sahab's Textile Business, a shop management solution tailored to real-world workflows: thaan-based fabric purchasing, per-suit pricing, advance payment tailoring orders, and worker/supplier ledger tracking.
 
 ---
 
