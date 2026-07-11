@@ -2,7 +2,7 @@
 
 **Complete Shop Management System for Textile & Tailoring Business**
 
-Al Musarmon is an offline-first Flutter application built for managing a textile/tailoring shop's complete operations — from customer accounts and inventory to sales, custom orders, suppliers, and workers. Designed specifically for shops dealing in fabric (thaan-based inventory) and custom-stitched garments.
+Al Musarmon is an offline-first Flutter application built for managing a textile/tailoring shop's complete operations from customer accounts and inventory to sales, custom orders, suppliers, and workers. Designed specifically for shops dealing in fabric (thaan-based inventory) and custom-stitched garments.
 
 ---
 
@@ -26,7 +26,7 @@ Al Musarmon is an offline-first Flutter application built for managing a textile
 - Low stock threshold alerts
 
 ### 🛒 New Sale (POS)
-- Quick product selection with "how many suits" input — automatically calculates meters and price
+- Quick product selection with "how many suits" input automatically calculates meters and price
 - Shopping cart interface with live total calculation
 - Optional customer selection (or walk-in customer)
 - Generates professional PDF receipts
