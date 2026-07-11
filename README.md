@@ -140,4 +140,4 @@ Shahid Sahab's Textile Business, a shop management solution tailored to real-wor
 
 ## 📄 License
 
-This is a private project built for personal business use.
+This is a private project built for personal business use but if it kinda helpfull for your business so can use.
