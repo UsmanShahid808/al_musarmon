@@ -79,7 +79,7 @@ class _WorkerListScreenState extends State<WorkerListScreen> {
               child: filteredWorkers.isEmpty
                   ? const Center(child: Text('No workers found'))
                   : ListView.builder(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.fromLTRB(14, 14, 14, 90),
                       itemCount: filteredWorkers.length,
                       itemBuilder: (context, index) {
                         Worker w = filteredWorkers[index];

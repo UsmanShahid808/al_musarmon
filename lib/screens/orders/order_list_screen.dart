@@ -86,7 +86,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
             'طلبك (${order.itemDescription}) جاهز الآن.\n'
             'المبلغ المتبقي: ${order.remainingAmount.toStringAsFixed(0)} ريال سعودي\n'
             'يرجى التكرم بالحضور لاستلامه.\n'
-            'شكراً لتعاملكم معنا - المسرمون';
+             'شكراً لتعاملكم معنا - المسارون';
         await WhatsAppHelper.sendMessage(context, customer.phone, message);
       }
     }
@@ -175,7 +175,6 @@ class _OrderListScreenState extends State<OrderListScreen> {
         ),
       );
 
-      // Delivery ke baad receipt bhejne ka option
       bool? sendReceipt = await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
@@ -286,7 +285,7 @@ class _OrderListScreenState extends State<OrderListScreen> {
               child: orders.isEmpty
                   ? const Center(child: Text('No orders yet'))
                   : ListView.builder(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.fromLTRB(14, 14, 14, 90),
                       itemCount: orders.length,
                       itemBuilder: (context, index) {
                         OrderModel o = orders[index];

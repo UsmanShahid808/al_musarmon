@@ -107,7 +107,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
               child: filteredProducts.isEmpty
                   ? const Center(child: Text('No products found'))
                   : ListView.builder(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.fromLTRB(14, 14, 14, 90),
                       itemCount: filteredProducts.length,
                       itemBuilder: (context, index) {
                         Product p = filteredProducts[index];

@@ -81,7 +81,7 @@ class _SupplierListScreenState extends State<SupplierListScreen> {
               child: filteredSuppliers.isEmpty
                   ? const Center(child: Text('No suppliers found'))
                   : ListView.builder(
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.fromLTRB(14, 14, 14, 90),
                       itemCount: filteredSuppliers.length,
                       itemBuilder: (context, index) {
                         Supplier s = filteredSuppliers[index];

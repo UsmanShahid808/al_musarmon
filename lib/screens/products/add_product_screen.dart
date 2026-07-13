@@ -95,6 +95,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -176,32 +178,61 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: TextField(
-                                  controller: numberOfThaansController,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: 'How many Thaans?',
-                                    prefixIcon: const Icon(Icons.numbers_rounded, size: 20),
-                                    filled: true,
-                                    fillColor: isDark ? const Color(0xFF262636) : Colors.white,
-                                  ),
+                          isSmallScreen
+                              ? Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    TextField(
+                                      controller: numberOfThaansController,
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        hintText: 'How many Thaans?',
+                                        prefixIcon: const Icon(Icons.numbers_rounded, size: 20),
+                                        filled: true,
+                                        fillColor: isDark ? const Color(0xFF262636) : Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: ElevatedButton(
+                                        onPressed: calculateTotalStock,
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color(0xFF6C63FF),
+                                          foregroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(vertical: 14),
+                                        ),
+                                        child: const Text('Fill Stock'),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    Expanded(
+                                      child: TextField(
+                                        controller: numberOfThaansController,
+                                        keyboardType: TextInputType.number,
+                                        decoration: InputDecoration(
+                                          hintText: 'How many Thaans?',
+                                          prefixIcon: const Icon(Icons.numbers_rounded, size: 20),
+                                          filled: true,
+                                          fillColor: isDark ? const Color(0xFF262636) : Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 10),
+                                    ElevatedButton(
+                                      onPressed: calculateTotalStock,
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(0xFF6C63FF),
+                                        foregroundColor: Colors.white,
+                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                      ),
+                                      child: const Text('Fill Stock'),
+                                    ),
+                                  ],
                                 ),
-                              ),
-                              const SizedBox(width: 10),
-                              ElevatedButton(
-                                onPressed: calculateTotalStock,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF6C63FF),
-                                  foregroundColor: Colors.white,
-                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                                ),
-                                child: const Text('Fill Stock'),
-                              ),
-                            ],
-                          ),
                         ],
                       ),
                     ),

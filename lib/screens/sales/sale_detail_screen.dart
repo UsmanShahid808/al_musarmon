@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/sale_model.dart';
 import '../../db/db_helper.dart';
+import '../../utils/receipt_helper.dart';
 
 class SaleDetailScreen extends StatefulWidget {
   final Sale sale;
@@ -32,10 +33,11 @@ class _SaleDetailScreenState extends State<SaleDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    int displayNumber = ReceiptHelper.displayNumber(widget.sale.id!);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sale #${widget.sale.id}'),
+        title: Text('Sale #$displayNumber'),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())

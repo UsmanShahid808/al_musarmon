@@ -62,7 +62,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
             width: double.infinity,
             height: 100,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFF6C63FF), Color(0xFF9C27B0)]),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [Color(0xFF6C63FF), Color(0xFF9C27B0)],
+              ),
             ),
           ),
           Expanded(
@@ -82,27 +86,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               Expanded(
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfitReportScreen()));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const ProfitReportScreen()),
+                                    );
                                   },
                                   icon: const Icon(Icons.bar_chart_rounded, size: 18),
                                   label: const Text('Profit/Loss'),
-                                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF6C63FF), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12)),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF6C63FF),
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                  ),
                                 ),
                               ),
                               const SizedBox(width: 10),
                               Expanded(
                                 child: ElevatedButton.icon(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SalesReportScreen()));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => const SalesReportScreen()),
+                                    );
                                   },
                                   icon: const Icon(Icons.calendar_month_rounded, size: 18),
                                   label: const Text('Date-wise'),
-                                  style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF11998e), foregroundColor: Colors.white, padding: const EdgeInsets.symmetric(vertical: 12)),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF11998e),
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(vertical: 12),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 16),
+
                           Row(
                             children: [
                               Expanded(
@@ -125,21 +144,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ],
                           ),
                           const SizedBox(height: 24),
-                          const Text('Low Stock Products', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+
+                          const Text(
+                            'Low Stock Products',
+                            style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                          ),
                           const SizedBox(height: 12),
+
                           lowStockProducts.isEmpty
                               ? Container(
                                   padding: const EdgeInsets.all(20),
                                   decoration: BoxDecoration(
                                     color: isDark ? const Color(0xFF1E1E2C) : Colors.white,
                                     borderRadius: BorderRadius.circular(16),
-                                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10)],
+                                    boxShadow: [
+                                      BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 10),
+                                    ],
                                   ),
-                                  child: const Row(children: [
-                                    Icon(Icons.check_circle, color: Color(0xFF38A169)),
-                                    SizedBox(width: 10),
-                                    Text('All products are well stocked'),
-                                  ]),
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.check_circle, color: Color(0xFF38A169)),
+                                      SizedBox(width: 10),
+                                      Text('All products are well stocked'),
+                                    ],
+                                  ),
                                 )
                               : Column(
                                   children: lowStockProducts.map((p) {
@@ -150,14 +178,24 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         color: isDark ? const Color(0xFF1E1E2C) : Colors.white,
                                         borderRadius: BorderRadius.circular(16),
                                         border: Border.all(color: const Color(0xFFE53E3E).withOpacity(0.2)),
-                                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+                                        boxShadow: [
+                                          BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8),
+                                        ],
                                       ),
                                       child: Row(
                                         children: [
                                           const Icon(Icons.warning_rounded, color: Color(0xFFE53E3E)),
                                           const SizedBox(width: 12),
-                                          Expanded(child: Text(p.name, style: const TextStyle(fontWeight: FontWeight.w600))),
-                                          Text('${p.quantity.toStringAsFixed(1)}m', style: const TextStyle(color: Color(0xFFE53E3E), fontWeight: FontWeight.bold)),
+                                          Expanded(
+                                            child: Text(p.name, style: const TextStyle(fontWeight: FontWeight.w600)),
+                                          ),
+                                          Text(
+                                            '${p.quantity.toStringAsFixed(1)}m',
+                                            style: const TextStyle(
+                                              color: Color(0xFFE53E3E),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     );
@@ -173,22 +211,47 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  Widget _buildStatCard({required String title, required String value, required IconData icon, required List<Color> gradientColors}) {
+  Widget _buildStatCard({
+    required String title,
+    required String value,
+    required IconData icon,
+    required List<Color> gradientColors,
+  }) {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: gradientColors),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: gradientColors,
+        ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [BoxShadow(color: gradientColors[0].withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 6))],
+        boxShadow: [
+          BoxShadow(
+            color: gradientColors[0].withOpacity(0.3),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(icon, color: Colors.white, size: 28),
           const SizedBox(height: 12),
-          Text(title, style: const TextStyle(color: Colors.white70, fontSize: 12)),
+          Text(
+            title,
+            style: const TextStyle(color: Colors.white70, fontSize: 12),
+          ),
           const SizedBox(height: 4),
-          Text(value, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

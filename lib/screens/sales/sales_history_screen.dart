@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/sale_model.dart';
 import '../../db/db_helper.dart';
+import '../../utils/receipt_helper.dart';
 import 'sale_detail_screen.dart';
 
 class SalesHistoryScreen extends StatefulWidget {
@@ -56,6 +57,7 @@ class _SalesHistoryScreenState extends State<SalesHistoryScreen> {
                       itemCount: sales.length,
                       itemBuilder: (context, index) {
                         Sale s = sales[index];
+                        int displayNumber = ReceiptHelper.displayNumber(s.id!);
                         return Container(
                           margin: const EdgeInsets.only(bottom: 12),
                           decoration: BoxDecoration(
@@ -72,7 +74,7 @@ class _SalesHistoryScreenState extends State<SalesHistoryScreen> {
                               child: const Icon(Icons.receipt_long_rounded, color: Color(0xFF38A169)),
                             ),
                             title: Text('SAR ${s.totalAmount.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16)),
-                            subtitle: Text(s.date, style: const TextStyle(fontSize: 12)),
+                            subtitle: Text('#$displayNumber • ${s.date}', style: const TextStyle(fontSize: 12)),
                             trailing: const Icon(Icons.chevron_right_rounded),
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => SaleDetailScreen(sale: s)));

@@ -11,6 +11,10 @@ class ReceiptHelper {
   static const PdfColor greyColor = PdfColor.fromInt(0xFF757575);
   static const PdfColor lightGrey = PdfColor.fromInt(0xFFF6F7FB);
 
+  static const int receiptNumberOffset = 25100;
+
+  static int displayNumber(int id) => id + receiptNumberOffset;
+
   static Future<pw.Font?> _loadArabicFontSafe() async {
     try {
       final fontData = await rootBundle.load('assets/fonts/NotoNaskhArabic-Regular.ttf');
@@ -20,7 +24,6 @@ class ReceiptHelper {
     }
   }
 
-  // Cart item ke naam se pieces count nikalna, jaisa "Aurafeel (2 suit)" se "2" nikalna
   static Map<String, dynamic> _parseItem(SaleItem item) {
     RegExp regex = RegExp(r'^(.*)\s\((\d+)\s*suit\)$');
     Match? match = regex.firstMatch(item.productName);
@@ -39,7 +42,6 @@ class ReceiptHelper {
       };
     }
 
-    // Fallback: agar naam mein suit count nahi mila, meters hi dikhao
     return {
       'name': item.productName,
       'qtyLabel': '${item.quantity.toStringAsFixed(1)}m',
@@ -56,7 +58,7 @@ class ReceiptHelper {
   }) async {
     try {
       final pdf = pw.Document();
-      final arabicFont = await _loadArabicFontSafe();
+      int shownNumber = displayNumber(saleId);
 
       pdf.addPage(
         pw.Page(
@@ -94,7 +96,7 @@ class ReceiptHelper {
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: [
                               pw.Text('Receipt No.', style: const pw.TextStyle(fontSize: 8, color: greyColor)),
-                              pw.Text('#$saleId', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+                              pw.Text('#$shownNumber', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
                             ],
                           ),
                           pw.Column(
@@ -175,7 +177,7 @@ class ReceiptHelper {
 
       await Printing.sharePdf(
         bytes: bytes,
-        filename: 'receipt_$saleId.pdf',
+        filename: 'receipt_$shownNumber.pdf',
       );
 
       return null;
@@ -193,9 +195,9 @@ class ReceiptHelper {
   }) async {
     try {
       final pdf = pw.Document();
-      final arabicFont = await _loadArabicFontSafe();
       double remaining = totalAmount - advancePaid;
       bool isFullyPaid = remaining <= 0;
+      int shownNumber = displayNumber(orderId);
 
       pdf.addPage(
         pw.Page(
@@ -234,7 +236,7 @@ class ReceiptHelper {
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: [
                               pw.Text('Order No.', style: const pw.TextStyle(fontSize: 8, color: greyColor)),
-                              pw.Text('#$orderId', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+                              pw.Text('#$shownNumber', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
                             ],
                           ),
                           pw.Column(
@@ -304,7 +306,7 @@ class ReceiptHelper {
 
       await Printing.sharePdf(
         bytes: bytes,
-        filename: 'order_receipt_$orderId.pdf',
+        filename: 'order_receipt_$shownNumber.pdf',
       );
 
       return null;

@@ -108,7 +108,7 @@ lib/
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/al_musarmon.git
+git clone https://github.com/UsmanShahid808/al_musarmon.git
 cd al_musarmon
 flutter pub get
 flutter run

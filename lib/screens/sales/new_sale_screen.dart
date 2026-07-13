@@ -308,6 +308,8 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isSmallScreen = screenWidth < 360;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -362,6 +364,7 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
                       child: Text(
                         selectedCustomer?.name ?? 'Walk-in Customer (tap to select)',
                         style: const TextStyle(fontWeight: FontWeight.w600),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     const Icon(Icons.chevron_right_rounded),
@@ -416,10 +419,11 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
                                     child: Icon(Icons.checkroom_rounded,
                                         color: lowStock ? Colors.red : const Color(0xFF6C63FF), size: 20),
                                   ),
-                                  title: Text(p.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                                  title: Text(p.name, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14), overflow: TextOverflow.ellipsis),
                                   subtitle: Text(
                                     'SAR ${p.salePrice.toStringAsFixed(0)}/m • ${p.quantity.toStringAsFixed(1)}m left',
                                     style: const TextStyle(fontSize: 11),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                   trailing: Container(
                                     padding: const EdgeInsets.all(6),
@@ -476,15 +480,18 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
                                     ),
                                     child: const Icon(Icons.check_circle_outline_rounded, color: Color(0xFF38A169), size: 20),
                                   ),
-                                  title: Text(item.productName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
+                                  title: Text(item.productName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14), overflow: TextOverflow.ellipsis),
                                   subtitle: Text('${item.quantity.toStringAsFixed(2)}m × SAR ${item.price.toStringAsFixed(0)}',
                                       style: const TextStyle(fontSize: 11)),
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text(
-                                        'SAR ${(item.quantity * item.price).toStringAsFixed(0)}',
-                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                      Flexible(
+                                        child: Text(
+                                          'SAR ${(item.quantity * item.price).toStringAsFixed(0)}',
+                                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                       IconButton(
                                         icon: const Icon(Icons.close_rounded, color: Colors.red, size: 18),
@@ -503,7 +510,7 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
                   ),
 
                   Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.fromLTRB(16, 14, 16, 14 + MediaQuery.of(context).padding.bottom),
                     decoration: BoxDecoration(
                       color: isDark ? const Color(0xFF1E1E2C) : Colors.white,
                       boxShadow: [
@@ -515,28 +522,42 @@ class _NewSaleScreenState extends State<NewSaleScreen> {
                       ],
                     ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text('Total:', style: TextStyle(fontSize: 16, color: Colors.grey)),
-                            Text(
-                              'SAR ${totalAmount.toStringAsFixed(0)}',
-                              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF38A169)),
+                            Text('Total:', style: TextStyle(fontSize: isSmallScreen ? 14 : 16, color: Colors.grey)),
+                            Flexible(
+                              child: Text(
+                                'SAR ${totalAmount.toStringAsFixed(0)}',
+                                style: TextStyle(fontSize: isSmallScreen ? 20 : 24, fontWeight: FontWeight.bold, color: const Color(0xFF38A169)),
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.right,
+                              ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 10),
                         SizedBox(
                           width: double.infinity,
-                          child: ElevatedButton.icon(
+                          child: ElevatedButton(
                             onPressed: completeSale,
-                            icon: const Icon(Icons.check_circle_outline_rounded),
-                            label: const Text('Complete Sale', style: TextStyle(fontSize: 16)),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF38A169),
                               foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              padding: EdgeInsets.symmetric(vertical: isSmallScreen ? 12 : 14),
+                            ),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.check_circle_outline_rounded, size: 20),
+                                  const SizedBox(width: 8),
+                                  Text('Complete Sale', style: TextStyle(fontSize: isSmallScreen ? 14 : 16)),
+                                ],
+                              ),
                             ),
                           ),
                         ),

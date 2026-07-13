@@ -29,20 +29,35 @@ class _AddCustomerScreenState extends State<AddCustomerScreen> {
 
   Future<void> pickFromContacts() async {
     try {
-      final contact = await FlutterContacts.openExternalPick();
-      if (contact != null) {
-        final fullContact = await FlutterContacts.getContact(contact.id, withProperties: true);
-        setState(() {
-          nameController.text = fullContact?.displayName ?? contact.displayName;
-          if (fullContact != null && fullContact.phones.isNotEmpty) {
-            phoneController.text = fullContact.phones.first.number.replaceAll(RegExp(r'[^0-9]'), '');
-          }
-        });
+      // Step 1: Pehle permission maango properly
+      bool hasPermission = await FlutterContacts.requestPermission(readonly: true);
+
+      if (!hasPermission) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Contacts permission is required to pick a contact. Please allow it in phone settings.')),
+          );
+        }
+        return;
       }
+
+      // Step 2: Ab picker kholo
+      final contact = await FlutterContacts.openExternalPick();
+      if (contact == null) return;
+
+      // Step 3: Poora data fetch karo (ab permission mil chuki hai, crash nahi hoga)
+      final fullContact = await FlutterContacts.getContact(contact.id, withProperties: true);
+
+      setState(() {
+        nameController.text = fullContact?.displayName ?? contact.displayName;
+        if (fullContact != null && fullContact.phones.isNotEmpty) {
+          phoneController.text = fullContact.phones.first.number.replaceAll(RegExp(r'[^0-9]'), '');
+        }
+      });
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Could not open contacts: $e')),
+          SnackBar(content: Text('Could not access contact: $e')),
         );
       }
     }
