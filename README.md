@@ -66,6 +66,18 @@ Al Musarmon is an offline-first Flutter application built for managing a textile
 
 ---
 
+## 📸 Screenshots
+
+| Home Screen | Dashboard | New Sale |
+|:---:|:---:|:---:|
+| ![Home](assets/screenshots/home.png) | ![Dashboard](assets/screenshots/dashboard.png) | ![New Sale](assets/screenshots/new_sale.png) |
+
+| Customers | Orders | Products |
+|:---:|:---:|:---:|
+| ![Customers](assets/screenshots/customers.png) | ![Orders](assets/screenshots/orders.png) | ![Products](assets/screenshots/products.png) |
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Framework:** Flutter (Dart)
